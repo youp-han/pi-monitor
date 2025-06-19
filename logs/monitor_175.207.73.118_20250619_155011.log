@@ -1,0 +1,96 @@
+
+=== [175.207.73.118] (apache) ===
+[vmstat 1 10]
+procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 0  0   7472 285020   4592 22749592    0    0     4    10    0    3  0  0 100  0  0
+ 0  0   7472 284768   4592 22749612    0    0     0     0  896 1512  1  0 99  0  0
+ 0  0   7472 284768   4592 22749612    0    0     0     0  284  309  0  0 100  0  0
+ 0  0   7472 284768   4592 22749612    0    0     0     0  243  270  0  0 100  0  0
+ 0  0   7472 284516   4592 22749612    0    0     0     0  287  358  0  0 100  0  0
+ 0  0   7472 284516   4592 22749612    0    0     0   124  238  313  0  0 100  0  0
+ 0  0   7472 284516   4592 22749612    0    0     0     0  215  233  0  0 100  0  0
+ 0  0   7472 284516   4592 22749612    0    0     0     0  262  292  0  0 100  0  0
+ 0  0   7472 284516   4592 22749612    0    0     0     0  244  281  0  0 100  0  0
+ 0  0   7472 284516   4592 22749612    0    0     0     0  221  263  0  0 100  0  0
+
+[df -k]
+Filesystem              1K-blocks     Used Available Use% Mounted on
+/dev/mapper/system-root 343797760 24433532 317350340   8% /
+devtmpfs                     4096        0      4096   0% /dev
+tmpfs                    12169612        0  12169612   0% /dev/shm
+efivarfs                      256       26       226  11% /sys/firmware/efi/efivars
+tmpfs                     4867848    98316   4769532   3% /run
+tmpfs                        1024        0      1024   0% /run/credentials/systemd-tmpfiles-setup-dev-early.service
+tmpfs                        1024        0      1024   0% /run/credentials/systemd-sysctl.service
+tmpfs                        1024        0      1024   0% /run/credentials/systemd-tmpfiles-setup-dev.service
+tmpfs                        1024        0      1024   0% /run/credentials/systemd-vconsole-setup.service
+/dev/mapper/system-root 343797760 24433532 317350340   8% /.snapshots
+/dev/mapper/system-root 343797760 24433532 317350340   8% /boot/grub2/i386-pc
+/dev/mapper/system-root 343797760 24433532 317350340   8% /boot/grub2/x86_64-efi
+/dev/mapper/system-root 343797760 24433532 317350340   8% /home
+/dev/mapper/system-root 343797760 24433532 317350340   8% /srv
+/dev/mapper/system-root 343797760 24433532 317350340   8% /usr/local
+/dev/mapper/system-root 343797760 24433532 317350340   8% /root
+/dev/mapper/system-root 343797760 24433532 317350340   8% /tmp
+/dev/mapper/system-root 343797760 24433532 317350340   8% /opt
+/dev/mapper/system-root 343797760 24433532 317350340   8% /var
+/dev/sda1                  130798     6030    124768   5% /boot/efi
+/dev/mapper/sw-sw        16707584 12935916   3771668  78% /sw
+tmpfs                        1024        0      1024   0% /run/credentials/systemd-tmpfiles-setup.service
+tmpfs                        1024        0      1024   0% /run/credentials/getty@tty1.service
+tmpfs                     2433920       20   2433900   1% /run/user/41621
+
+[ps -ef | grep httpd]
+psi.syh+  7709  7506 25 15:50 ?        00:00:00 bash -c ps -ef | grep httpd
+psi.syh+  7797  7709  0 15:50 ?        00:00:00 grep httpd
+appluser 21937 26224  0  6월13 ?      00:00:23 /appweb/apache/bin/httpd -k start
+root     26224     1  0  6월12 ?      00:00:16 /appweb/apache/bin/httpd -k start
+appluser 26230 26224  0  6월12 ?      00:00:19 /appweb/apache/bin/httpd -k start
+appluser 26231 26224  0  6월12 ?      00:00:11 /appweb/apache/bin/httpd -k start
+appluser 26232 26224  0  6월12 ?      00:00:14 /appweb/apache/bin/httpd -k start
+
+[systemctl status httpd]
+● httpd.service - Apache HTTP Server (custom build)
+     Loaded: loaded (/etc/systemd/system/httpd.service; enabled; preset: disabled)
+     Active: active (running) since Thu 2025-06-12 15:16:06 KST; 1 week 0 days ago
+    Process: 26216 ExecStart=/appweb/apache/bin/apachectl start (code=exited, status=0/SUCCESS)
+   Main PID: 26224 (httpd)
+      Tasks: 113
+        CPU: 1min 24.934s
+     CGroup: /system.slice/httpd.service
+             ├─21937 /appweb/apache/bin/httpd -k start
+             ├─26224 /appweb/apache/bin/httpd -k start
+
+[Apache 로그 에러 확인]
+[Apache Log Errors - mapsext_error.log.20250619]
+에러 라인 수: 1
+[에러 라인 내용]
+[Thu Jun 19 11:15:23.303038 2025] [authz_core:error] [pid 21937:tid 140469824632512] [client 127.0.0.1:55826] AH01630: client denied by server configuration: /appweb/apache/htdocs/
+
+[포트 상태 확인]
+포트 80 → LISTEN 중
+TIME-WAIT 0      0      175.207.73.118:10050   10.110.32.51:52480       
+TIME-WAIT 0      0      175.207.73.118:10050   10.110.32.51:31380       
+TIME-WAIT 0      0      175.207.73.118:10050   10.110.32.51:18008       
+TIME-WAIT 0      0      175.207.73.118:10050   10.110.32.51:18016       
+TIME-WAIT 0      0      175.207.73.118:10050   10.110.32.51:17980       
+TIME-WAIT 0      0      175.207.73.118:10050   10.110.32.51:18048       
+TIME-WAIT 0      0      175.207.73.118:10050   10.110.32.51:18062       
+TIME-WAIT 0      0      175.207.73.118:10050   10.110.32.51:18032       
+TIME-WAIT 0      0      175.207.73.118:10050   10.110.32.51:52580       
+LISTEN    0      511                 *:80                 *:*
+포트 443 → LISTEN 중
+ESTAB     0      0      175.207.73.118:42488 13.228.234.223:443         
+LISTEN    0      511                 *:443                *:*
+
+[systemctl status firewalld]
+● firewalld.service - firewalld - dynamic firewall daemon
+     Loaded: loaded (/usr/lib/systemd/system/firewalld.service; enabled; preset: disabled)
+     Active: active (running) since Thu 2025-05-08 14:34:09 KST; 1 month 11 days ago
+       Docs: man:firewalld(1)
+   Main PID: 1116 (firewalld)
+      Tasks: 2
+        CPU: 12.972s
+     CGroup: /system.slice/firewalld.service
+             └─1116 /usr/bin/python3 /usr/sbin/firewalld --nofork --nopid

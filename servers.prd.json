@@ -1,0 +1,44 @@
+[
+  {
+    "host": "10.110.18.54",
+    "auth": "admin_user",
+    "type": "apache",
+    "where": "apache",
+    "envFile": "mapsint"
+  },
+  {
+    "host": "10.110.18.55",
+    "auth": "admin_user",
+    "type": "apache",
+    "where": "apache",
+    "envFile": "mapsint"
+  },
+  {
+    "host": "175.207.73.117",
+    "auth": "admin_user",
+    "type": "apache",
+    "where": "apache",
+    "envFile": "mapsext"
+  },
+  {
+    "host": "175.207.73.118",
+    "auth": "admin_user",
+    "type": "apache",
+    "where": "apache",
+    "envFile": "mapsext"
+  },
+  {
+    "host": "10.110.18.51",
+    "auth": "admin_user",
+    "type": "tomcat",
+    "where": "",
+    "envFile": ""
+  },
+  {
+    "host": "10.110.18.52",
+    "auth": "admin_user",
+    "type": "tomcat",
+    "where": "",
+    "envFile": ""
+  }
+]

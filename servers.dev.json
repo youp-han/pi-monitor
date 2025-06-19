@@ -1,0 +1,23 @@
+[
+  {
+    "host": "10.110.15.51",
+    "auth": "admin_user",
+    "type": "apache",
+    "where": "apache2",
+    "envFile": "mapsintdev"
+  },
+  {
+    "host": "10.110.15.52",
+    "auth": "admin_user",
+    "type": "apache",
+    "where": "apache",
+    "envFile": "mapsextdev"
+  },
+  {
+    "host": "10.110.15.53",
+    "auth": "admin_user",
+    "type": "tomcat",
+    "where": "",
+    "envFile": ""
+  }
+]
