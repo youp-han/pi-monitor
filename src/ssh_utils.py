@@ -6,6 +6,10 @@ def execute_ssh_command(client, command):
     표준 출력과 표준 에러를 문자열로 반환합니다.
     """
     # 명령어 실행 (stdin, stdout, stderr 반환)
-    stdin, stdout, stderr = client.exec_command(command)
-    # 표준 출력과 표준 에러를 읽어서 디코딩 후 반환
-    return stdout.read().decode(),
+    try:
+        stdin, stdout, stderr = client.exec_command(command)
+        # 표준 출력과 표준 에러를 읽어서 디코딩 후 반환
+        return stdout.read().decode(), stderr.read().decode()
+    except Exception as e:
+        return "", str(e)    
+
