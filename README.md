@@ -1,5 +1,23 @@
 # pi-monitor
 
+## file structure (to-be)
+├── main.py
+├── src/
+│   ├── config.py
+│   ├── ssh_utils.py
+│   ├── monitor.py
+│   ├── check/
+│   │   ├── system.py
+│   │   ├── apache.py
+│   │   ├── tomcat.py
+│   │   ├── network.py
+│   └── utils/
+│       └── log_helpers.py
+├── logs/
+├── .env
+├── servers.dev.json / servers.prd.json ...
+
+
 **pi-monitor** is a Python script for monitoring resources and logs on multiple Linux servers (Apache, Tomcat, etc.) via SSH. It checks CPU, disk, service status, and log files, then prints and saves the results.
 
 ---
