@@ -120,7 +120,7 @@ def check_tomcat_context_resource(client):
     Tomcat context.xml에서 특정 JNDI 리소스(PIS_JNDI) 설정을 추출.
     """
     context_path = "/appwas/tomcat/apache-tomcat-9.0.87/conf/context.xml"
-    cmd = r'''awk '/<Resource/{block=""; capture=1}
+    cmd = r'''sudo awk '/<Resource/{block=""; capture=1}
     capture {block = block $0 "\n"}
     /\/>/ && capture {
         if (block ~ /name="PIS_JNDI"/) print block
