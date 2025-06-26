@@ -20,8 +20,8 @@ def load_server_configs(env: str = "dev"):
     with open(filename, "r", encoding="utf-8") as f:
         servers = json.load(f)
 
-    # 각 서버에 환경변수에서 불러온 관리자 계정 정보 추가
+    # 각 서버에 환경변수에서 불러온 관리자 계정 정보(user, pass) 추가
     for s in servers:
-        s["user"] = os.getenv("ADMIN_USER")
-        s["pass"] = os.getenv("ADMIN_PASS")
-    return servers
+        s["user"] = os.getenv("ADMIN_USER")  # .env에서 ADMIN_USER 값을 읽어옴
+        s["pass"] = os.getenv("ADMIN_PASS")  # .env에서 ADMIN_PASS 값을 읽어옴
+    return servers  # 서버 설정 리스트 반환

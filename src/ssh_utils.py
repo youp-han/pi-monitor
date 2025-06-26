@@ -11,5 +11,6 @@ def execute_ssh_command(client, command):
         # 표준 출력과 표준 에러를 읽어서 디코딩 후 반환
         return stdout.read().decode(), stderr.read().decode()
     except Exception as e:
-        return "", str(e)    
+        # 예외 발생 시 빈 문자열과 에러 메시지 반환
+        return "", str(e)
 
