@@ -11,17 +11,17 @@ def check_system_health(client):
     """
     result = "[vmstat 1 10]\n"
     vmstat_out, _ = execute_ssh_command(client, "vmstat 1 10")  # vmstat 명령 실행
-    result += vmstat_out
+    result += vmstat_out  + "\n"
 
     # CPU idle 값이 낮으면 top 명령 실행 결과 추가
     if parse_vmstat_for_high_cpu(vmstat_out):
         result += "\n[High CPU detected! top 실행]\n"
         top_out, _ = execute_ssh_command(client, "top -b -n 1 | head -n 20")
-        result += top_out
+        result += top_out + "\n"
 
     result += "\n[df -k]\n"
     df_out, _ = execute_ssh_command(client, "df -k")  # 디스크 사용량 확인
-    result += df_out
+    result += df_out + "\n"
     return result
 
 

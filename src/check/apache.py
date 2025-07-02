@@ -11,16 +11,16 @@ def check_apache_services(client, s_where, s_envFile):
     result = "\n[Apache 서비스 확인]\n"
     result += "\n[ps -ef | grep httpd]\n"
     out, _ = execute_ssh_command(client, "ps -ef | grep httpd")  # httpd 프로세스 확인
-    result += out
+    result += out + "\n"
 
     result += "\n[systemctl status httpd]\n"
     out, _ = execute_ssh_command(client, "systemctl status httpd | head -n 10")  # httpd 서비스 상태 확인
-    result += out
+    result += out + "\n"
 
     result += "\n[Apache 로그 에러 확인]\n"
     result += check_apache_log(client, s_where, s_envFile)  # Apache 에러 로그 확인
     result += check_port_status(client, [80, 443])  # 80, 443 포트 상태 확인
-    return result
+    return result + "\n"
 
 def check_apache_log(client, s_where, s_envFile):
     """
@@ -46,7 +46,7 @@ fi
     log_path = out.strip()
 
     if log_path == "NONE":
-        return "Apache 로그 파일 없음 또는 찾을 수 없음\n"
+        return "Apache 로그 파일 없음 또는 찾을 수 없음\n" + "\n"
 
     # 에러 라인 추출
     cmd_lines = f"sudo grep -i 'error' {log_path}"
@@ -57,6 +57,6 @@ fi
     count_out, _ = execute_ssh_command(client, cmd_count)
     filename = os.path.basename(log_path)
 
-    result = f"[Apache Log Errors - {filename}]\n에러 라인 수: {count_out.strip()}"
+    result = f"[Apache Log Errors - {filename}]\n에러 라인 수: {count_out.strip()}" + "\n"
     result += f"\n[에러 라인 내용]\n{error_lines.strip()}\n" if error_lines.strip() else "\n(에러 내용 없음)\n"
     return result

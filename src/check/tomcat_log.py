@@ -64,7 +64,7 @@ def check_tomcat_context_resource(client):
     out, err = execute_ssh_command(client, cmd)
     result = "\n[context.xml Resource 설정 확인]\n"
     if out.strip():
-        result += out.strip()
+        result += out.strip() + "\n"
     else:
-        result += f"⚠️ Resource 설정 없음 또는 파일 권한 문제\n{err.strip()}"
+        result += f"⚠️ Resource 설정 없음 또는 파일 권한 문제\n{err.strip()}" + "\n"
     return result

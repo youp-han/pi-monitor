@@ -7,7 +7,7 @@ def check_firewalld_status(client):
     """
     result = "\n[systemctl status firewalld]\n"
     out, _ = execute_ssh_command(client, "systemctl status firewalld | head -n 10")  # firewalld 서비스 상태 확인
-    result += out
+    result += out + "\n"
     return result
 
 
@@ -20,7 +20,7 @@ def check_port_status(client, ports):
         cmd = f"ss -tan | grep {port}"  # 해당 포트의 LISTEN 상태 확인
         out, _ = execute_ssh_command(client, cmd)
         if out.strip():
-            result += f"포트 {port} → LISTEN 중\n{out.strip()}\n"
+            result += f"포트 {port} → LISTEN 중\n{out.strip()}\n" + "\n"
         else:
-            result += f"포트 {port} → ❌ LISTEN 아님 또는 비어 있음\n"
+            result += f"포트 {port} → ❌ LISTEN 아님 또는 비어 있음\n" + "\n"
     return result
