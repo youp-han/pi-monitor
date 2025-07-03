@@ -14,11 +14,11 @@ def check_tomcat_services(client):
 
     result += "\n[ps -ef | grep tomcat]\n"
     out, _ = execute_ssh_command(client, "ps -ef | grep tomcat")  # tomcat 프로세스 확인
-    result += out
+    result += out + "\n"
 
     result += "\n[systemctl status tomcat]\n"
     out, _ = execute_ssh_command(client, "systemctl status tomcat | head -n 10")  # tomcat 서비스 상태 확인
-    result += out
+    result += out + "\n"
 
     result += "\n[Tomcat 로그 에러 확인]\n"
     result += check_tomcat_log_errors(client)         # Tomcat 로그 에러 라인 확인
