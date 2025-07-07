@@ -20,7 +20,7 @@ def check_system_health(client):
         result += top_out + "\n"
 
     result += "\n[df -k]\n"
-    df_out, _ = execute_ssh_command(client, "df -k")  # 디스크 사용량 확인
+    df_out, _ = execute_ssh_command(client, "df -h")  # 디스크 사용량 확인
     result += df_out + "\n"
     return result
 
