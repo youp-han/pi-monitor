@@ -1,51 +1,40 @@
-# pi-monitor
+# PiMonitor
 
+PiMonitor는 원격 서버의 상태를 모니터링하고 보고서를 생성하는 Python 기반의 도구입니다. SSH를 통해 서버에 접속하여 시스템 리소스, 서비스 상태, 로그 파일 등을 점검하고, 그 결과를 파일로 저장합니다.
 
-**pi-monitor** is a Python script for monitoring resources and logs on multiple Linux servers (Apache, Tomcat, etc.) via SSH. It checks CPU, disk, service status, and log files, then prints and saves the results.
+## 주요 기능
 
----
+- **시스템 상태 모니터링**: CPU, 메모리, 디스크 사용량 등 시스템 전반의 건강 상태를 점검합니다.
+- **서비스 상태 확인**: Apache, Tomcat 등 주요 웹/애플리케이션 서버의 프로세스 및 서비스 상태를 확인합니다.
+- **로그 파일 분석**: Apache, Tomcat 로그 파일에서 에러를 탐지하고 보고합니다.
+- **네트워크 및 방화벽 점검**: 특정 포트의 LISTEN 상태 및 firewalld 서비스 상태를 확인합니다.
+- **보고서 생성**: 모니터링 결과를 개별 로그 파일로 저장하고, 모든 로그를 통합한 보고서를 생성합니다.
 
-## Configuration Files
+## 설정 파일
 
-### servers.{env}.json
+### servers.{환경}.json
 
-Contains the list and information of servers to monitor.
+모니터링할 서버 정보를 담은 JSON 파일입니다.
 
 ```json
 [
   {
     "host": "192.168.0.10",
-    "type": "apache",      // "apache" or "tomcat"
-    "where": "web01",      // Folder name for apache
-    "envFile": "extdev"    // Used for log file name
+    "type": "apache",      // "apache" 또는 "tomcat"
+    "where": "web01",      // Apache의 경우 폴더명
+    "envFile": "extdev"    // 로그 파일명에 사용
   }
 ]
 ```
 
 ### .env
 
-Stores SSH credentials for server access.
+서버 접속을 위한 SSH 인증 정보를 저장합니다.
 
 ```
 ADMIN_USER=your_ssh_username
 ADMIN_PASS=your_ssh_password
 ```
-
----
-
-## Features
-
-- Connects to each server via SSH and checks:
-  - CPU/memory usage (`vmstat`, `top`)
-  - Disk usage (`df`)
-  - Service status (`systemctl status`)
-  - Error lines in main log files (Apache, Tomcat)
-  - Port status (`ss`)
-  - Tomcat context.xml resource settings
-
-- Results are printed to the console and saved as `logs/monitor_{host}_{datetime}.log`.
-
----
 
 ## 설치 및 실행
 
@@ -140,8 +129,6 @@ python aggregate_report.py
 
 `logs` 디렉토리에 `aggregated_report_YYYYMMDD_HHMMSS.log` 파일이 생성됩니다.
 
----
-
 ## 프로젝트 구조
 
 ```
@@ -173,27 +160,6 @@ python aggregate_report.py
         └── metrics.py        # 지표 관련 유틸리티
 ```
 
----
-
 ## 라이선스
 
 이 프로젝트는 MIT 라이선스에 따라 배포됩니다.
-
-
-# PiMonitor
-
-PiMonitor는 원격 서버의 상태를 모니터링하고 보고서를 생성하는 Python 기반의 도구입니다. SSH를 통해 서버에 접속하여 시스템 리소스, 서비스 상태, 로그 파일 등을 점검하고, 그 결과를 파일로 저장합니다.
-
-## 주요 기능
-
-- **시스템 상태 모니터링**: CPU, 메모리, 디스크 사용량 등 시스템 전반의 건강 상태를 점검합니다.
-- **서비스 상태 확인**: Apache, Tomcat 등 주요 웹/애플리케이션 서버의 프로세스 및 서비스 상태를 확인합니다.
-- **로그 파일 분석**: Apache, Tomcat 로그 파일에서 에러를 탐지하고 보고합니다.
-- **네트워크 및 방화벽 점검**: 특정 포트의 LISTEN 상태 및 firewalld 서비스 상태를 확인합니다.
-- **보고서 생성**: 모니터링 결과를 개별 로그 파일로 저장하고, 모든 로그를 통합한 보고서를 생성합니다.
-
-
-
----
-
-
