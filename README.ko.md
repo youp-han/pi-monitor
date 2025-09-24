@@ -1,3 +1,5 @@
+- [English (영어)](README.md)
+
 # Pi-Monitor (파이 모니터)
 
 Pi-Monitor는 Python으로 작성된 간단한 서버 모니터링 도구입니다. SSH를 통해 여러 원격 서버에 동시에 접속하여 다양한 상태 및 서비스 점검을 병렬로 수행하고 결과를 로그 파일로 저장합니다.
@@ -103,7 +105,3 @@ python main.py prod
 ```
 
 모니터링 결과는 콘솔에 출력되고 `logs/` 디렉터리에 저장됩니다.
-
-## 언어
-
--   [English (영어)](README.md)

@@ -1,3 +1,5 @@
+- [한국어 (Korean)](README.ko.md)
+
 # Pi-Monitor
 
 Pi-Monitor is a simple Python-based server monitoring tool. It connects to multiple remote servers via SSH, performs various health and service checks concurrently, and logs the results.
@@ -103,7 +105,3 @@ python main.py prod
 ```
 
 The monitoring results will be printed to the console and saved in the `logs/` directory.
-
-## Language
-
--   [한국어 (Korean)](README.ko.md)
